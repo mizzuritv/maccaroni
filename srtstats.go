@@ -45,7 +45,6 @@ type SrtStats struct {
 	MbpsRecvRate         float64 // receiving rate in Mb/s
 	UsSndDuration        int64   // busy sending time (i.e., idle time exclusive)
 	PktReorderDistance   int     // size of order discrepancy in received sequences
-	PktRcvAvgBelatedTime float64 // average time of packet delay for belated packets (packets with sequence past the ACK)
 	PktRcvBelated        int64   // number of received AND IGNORED packets due to having come too late
 
 	PktSndDrop      int   // number of too-late-to-send dropped packets
@@ -136,7 +135,6 @@ func newSrtStats(stats *C.SRT_TRACEBSTATS) *SrtStats {
 	s.MbpsRecvRate = float64(stats.mbpsRecvRate)
 	s.UsSndDuration = int64(stats.usSndDuration)
 	s.PktReorderDistance = int(stats.pktReorderDistance)
-	s.PktRcvAvgBelatedTime = float64(stats.pktRcvAvgBelatedTime)
 	s.PktRcvBelated = int64(stats.pktRcvBelated)
 
 	s.PktSndDrop = int(stats.pktSndDrop)
