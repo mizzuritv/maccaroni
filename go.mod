@@ -1,4 +1,4 @@
-module github.com/haivision/srtgo
+module github.com/mizzuritv/maccaroni
 
 go 1.12
 
