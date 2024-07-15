@@ -90,7 +90,7 @@ func NewSrtSocket(host string, port uint16, options map[string]string) *SrtSocke
 	s.host = host
 	s.port = port
 	s.options = options
-	s.pollTimeout = -1
+	s.pollTimeout = 10000
 
 	val, exists := options["pktsize"]
 	if exists {
