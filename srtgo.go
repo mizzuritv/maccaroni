@@ -110,6 +110,7 @@ func NewSrtSocket(host string, port uint16, options map[string]string) *SrtSocke
 
 	if !s.blocking {
 		s.pd = pollDescInit(s.socket)
+		s.pd.setDeadline(10 * time.Second, ModeRead)
 	}
 
 	finalizer := func(obj interface{}) {
@@ -129,6 +130,7 @@ func NewSrtSocket(host string, port uint16, options map[string]string) *SrtSocke
 		return nil
 	}
 
+
 	return s
 }
 
@@ -146,6 +148,7 @@ func newFromSocket(acceptSocket *SrtSocket, socket C.SRTSOCKET) (*SrtSocket, err
 
 	if !s.blocking {
 		s.pd = pollDescInit(s.socket)
+		s.pd.setDeadline(10 * time.Second, ModeRead)
 	}
 
 	finalizer := func(obj interface{}) {
@@ -155,6 +158,7 @@ func newFromSocket(acceptSocket *SrtSocket, socket C.SRTSOCKET) (*SrtSocket, err
 			sf.pd.release()
 		}
 	}
+	
 
 	//Cleanup SrtSocket if no references exist anymore
 	runtime.SetFinalizer(s, finalizer)
