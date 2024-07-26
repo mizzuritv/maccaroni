@@ -110,13 +110,6 @@ func NewSrtSocket(host string, port uint16, options map[string]string) *SrtSocke
 
 	if !s.blocking {
 		s.pd = pollDescInit(s.socket)
-		// Aktuelle Zeit
-   		now := time.Now()
-    		fmt.Println("Aktuelle Zeit:", now)
-   		// 10 Sekunden hinzufügen
-  		futureTime := now.Add(10 * time.Second)
-                fmt.Println("Zeit nach 10 Sekunden:", futureTime)
-		s.pd.setDeadline(futureTime, ModeRead)
 	}
 
 	finalizer := func(obj interface{}) {
@@ -154,13 +147,6 @@ func newFromSocket(acceptSocket *SrtSocket, socket C.SRTSOCKET) (*SrtSocket, err
 
 	if !s.blocking {
 		s.pd = pollDescInit(s.socket)
-		// Aktuelle Zeit
-   		now := time.Now()
-    		fmt.Println("Aktuelle Zeit:", now)
-   		// 10 Sekunden hinzufügen
-  		futureTime := now.Add(10 * time.Second)
-                fmt.Println("Zeit nach 10 Sekunden:", futureTime)
-		s.pd.setDeadline(futureTime, ModeRead)
 	}
 
 	finalizer := func(obj interface{}) {
